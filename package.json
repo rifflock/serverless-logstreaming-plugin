@@ -1,0 +1,37 @@
+{
+  "name": "serverless-logstreaming",
+  "version": "1.0.0",
+  "description": "Serverless Logstreaming Plugin - Stream logs to the loghandler function",
+  "main": "index.js",
+  "author": "Michael Riffle",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rifflock/serverless-logstreaming-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rifflock/serverless-logstreaming-plugin/issues"
+  },
+  "homepage": "https://github.com/rifflock/serverless-logstreaming-plugin",
+  "keywords": [
+    "serverless plugin logstreaming",
+    "serverless framework plugin",
+    "serverless applications",
+    "serverless plugins",
+    "cloudwatch",
+    "aws cloudwatch",
+    "lambda",
+    "aws",
+    "aws lambda",
+    "amazon",
+    "amazon web services",
+    "serverless.com",
+    "logs"
+  ],
+  "devDependencies": {
+    "eslint": "^3.19.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
+}

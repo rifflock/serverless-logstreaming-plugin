@@ -1,0 +1,21 @@
+# EditorConfig is awesome: http://EditorConfig.org
+# Plugins available for nearly all IDEs and editors
+
+# top-most EditorConfig file for this project
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# Matches multiple files with brace expansion notation
+# Set default charset
+[*.json]
+charset = utf-8
+indent_style = space
+indent_size = 2
+
+[*.js]
+charset = utf-8
+indent_style = tab
