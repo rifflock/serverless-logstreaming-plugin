@@ -19,33 +19,39 @@ plugins:
   - serverless-logstreaming
 ```
 
-2. Define permission for Cloudwatch to write to your loghandler:
-
-```
-resources:
-  # AWS CloudFormation Template
-  Resources:
-
-    # IAM
-    LoggingLambdaPermission:
-      Type: AWS::Lambda::Permission
-      Properties:
-        FunctionName:
-          Ref: LoghandlerLambdaFunction
-        Action: lambda:InvokeFunction
-        Principal: logs.amazonaws.com
-```
-
-3. If you don't already have a loghandler defined somewhere in your stack, do so.
+2. Define your loghandler function:
 
 ```
 functions:
-  loghandler:
+  myLogHandler:
     description: 'CW Logs handler for Tasks'
-    handler: handlers/loghandler/handler.handler
+    handler: handlers/myLogHandler/handler.handler
 ```
 
-And that's all it takes. Now the logs of all your lambda functions will stream through that loghandler
+3. Reference the name of your loghandler function in the custom section:
+
+```
+custom:
+  logHandler:
+    function: myLogHandler
+```
+
+And that's all it takes. Now the logs of all your lambda functions will stream through that loghandler.
+
+If you have a function where you _don't_ want to stream logs through the loghandler it's as simple as adding an exception:
+
+```
+functions:
+  handlerToNotStream:
+    description: 'This lambda should not stream logs'
+    loghandler: false
+```
+
+That `loghandler: false` will exempt this lambda from streaming through the loghandler function.
+
+## Changelog
+* 1.1.0 - Add logstreaming permission by default instead of requiring user to do so, add flexibility in naming
+* 1.0.0 - Initial commit.
 
 ## Acknowledgements
 * Thanks to @andymac4182 for the [gist](https://gist.github.com/andymac4182/4837f722231ea493685f6b4699c939a1) that inspired this plugin.
