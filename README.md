@@ -12,6 +12,8 @@ with the popular [Serverless Framework](https://serverless.com) and AWS Lambda.
 
 ## Configuration
 
+Currently this plugin ONLY works with the AWS provider.
+
 1. Add `serverless-logstreaming` to your `serverless.yml` file in the root of your serverless project
 
 ```
