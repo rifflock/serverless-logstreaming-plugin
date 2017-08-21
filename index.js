@@ -8,6 +8,7 @@ class LogStreamingPlugin {
 	constructor(serverless, options) {
 		this.serverless = serverless;
 		this.options = options;
+		this.provider = this.serverless.getProvider("aws");
 
 		this.hooks = {
 			"after:deploy:compileFunctions": this.logServerless.bind(this)
@@ -16,7 +17,7 @@ class LogStreamingPlugin {
 
 	logServerless() {
 		const logHandlerFnName = _.get(this.serverless, "service.custom.logHandler.function", "loghandler");
-		const logHandlerLogicalId = this.serverless.service.provider.naming.getLambdaLogicalId(logHandlerFnName);
+		const logHandlerLogicalId = this.provider.naming.getLambdaLogicalId(logHandlerFnName);
 		const cloudwatchLogsSubscriptionFilterTemplate = {
 			Type: "AWS::Logs::SubscriptionFilter",
 			DependsOn: "LoggingLambdaPermission",
@@ -33,7 +34,7 @@ class LogStreamingPlugin {
 		};
 
 		_.forEach(this.serverless.service.getAllFunctions(), functionName => {
-			const functionLogicalId = this.serverless.service.provider.naming.getLambdaLogicalId(functionName);
+			const functionLogicalId = this.provider.naming.getLambdaLogicalId(functionName);
 			if (functionName === logHandlerFnName) {
 				// Do not add the loghandler to itself.
 				return;
@@ -43,7 +44,7 @@ class LogStreamingPlugin {
 				// If the loghandler property is set to false then do not create a loghandler
 				return;
 			}
-			const logGroupLogicalId = this.serverless.service.provider.naming.getLogGroupName(functionObject.name);
+			const logGroupLogicalId = this.provider.naming.getLogGroupName(functionObject.name);
 			cloudwatchLogsSubscriptionFilterTemplate.Properties.LogGroupName = logGroupLogicalId;
 			const newResources = {
 				[`${functionLogicalId}SubscriptionFilter`]: cloudwatchLogsSubscriptionFilterTemplate
