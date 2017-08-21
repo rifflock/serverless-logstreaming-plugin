@@ -32,7 +32,7 @@ class LogStreamingPlugin {
 		let logHandlerLambdaName;
 		const logHandlerFnName = _.get(this.serverless, "service.custom.logHandler.function", "loghandler");
 		_.forEach(this.serverless.service.getAllFunctions(), functionName => {
-			const functionLogicalId = `${_.upperFirst(functionName)}LambdaFunction`;
+			const functionLogicalId = this.serverless.service.provider.naming.getLambdaLogicalId(functionName);
 			if (functionName === logHandlerFnName) {
 				// Do not add the loghandler to itself.
 				logHandlerLambdaName = functionLogicalId;
