@@ -61,7 +61,9 @@ class LogStreamingPlugin {
 				["LoggingLambdaPermission"]: {
 					Type: "AWS::Lambda::Permission",
 					Properties: {
-						FunctionName: logHandlerLogicalId,
+						FunctionName: {
+							Ref: logHandlerLogicalId
+						},
 						Action: "lambda:InvokeFunction",
 						Principal: "logs.amazonaws.com"
 					}
