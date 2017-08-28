@@ -23,7 +23,7 @@ class LogStreamingPlugin {
 			DependsOn: "LoggingLambdaPermission",
 			Properties: {
 				LogGroupName: "LogGroup",
-				FilterPattern: "{ $.TestForValidJson NOT EXISTS }",
+				FilterPattern: "",
 				DestinationArn: {
 					"Fn::GetAtt": [
 						logHandlerLogicalId,

@@ -52,6 +52,7 @@ functions:
 That `loghandler: false` will exempt this lambda from streaming through the loghandler function.
 
 ## Changelog
+* 1.1.3 - Fix several permissions bugs. Remove unnecessary logFilter.
 * 1.1.0 - Add logstreaming permission by default instead of requiring user to do so, add flexibility in naming
 * 1.0.0 - Initial commit.
 
